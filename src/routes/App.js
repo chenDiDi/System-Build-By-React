@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Layout, Menu, Icon } from 'antd';
 import './App.less';
 import './common.less';
@@ -30,6 +31,7 @@ class App extends React.Component {
   };
   rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   render() {
+    const children = this.props.children;
     return (
       <Layout className="AppLayout">
         <Sider
@@ -66,13 +68,7 @@ class App extends React.Component {
           <Header>系统</Header>
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#fff' }}>
-              {/* {this.props.children}*/}
-              content
-              contentcontentcontentcontentcontent
-              content
-              contentcontent
-              content
-              <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+              {children}
             </div>
             <Footer>System Design &copy;2017 Created by DiDi on 2017.10</Footer>
           </Content>
@@ -81,5 +77,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default App;
