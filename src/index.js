@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import dva from 'dva';
 import { browserHistory } from 'dva/router';
+import createLoading from 'dva-loading';
 import './index.css';
 
 // 1. Initialize
@@ -9,6 +10,7 @@ const app = dva({
 });
 
 // 2. Plugins
+app.use(createLoading({ effects: true }));
 // app.use({});
 
 // 3. Model

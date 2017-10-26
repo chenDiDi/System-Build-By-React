@@ -1,4 +1,14 @@
 {
+  "proxy": {
+    "/home": {
+      "target": "http://cas.admin.gemcho.com",
+      "changeOrigin": true
+    },
+    "/admin": {
+      "target": "http://cas.admin.gemcho.com",
+      "changeOrigin": true
+    }
+  },
   "entry": "src/index.js",
   "env": {
     "development": {

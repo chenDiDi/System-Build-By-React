@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Menu, Icon } from 'antd';
+import { Link } from 'dva/router';
 import './App.less';
-import './common.less';
+import './Common.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -51,7 +52,7 @@ class App extends React.Component {
               <Menu.Item key="3">发送消息</Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" title={<span><Icon type="user" /><span>用户管理</span></span>}>
-              <Menu.Item key="4">用户列表</Menu.Item>
+              <Menu.Item key="4"><Link to="/user">用户列表</Link></Menu.Item>
               <Menu.Item key="5">个人资料</Menu.Item>
             </SubMenu>
             <SubMenu key="sub3" title={<span><Icon type="user" /><span>任务管理</span></span>}>
