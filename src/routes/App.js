@@ -17,7 +17,7 @@ class App extends React.Component {
     };
   }
   onCollapse = (collapsed) => {
-    console.log(collapsed);
+    // console.log(collapsed);
     this.setState({ collapsed });
   };
   onOpenChange = (openKeys) => {
@@ -66,13 +66,11 @@ class App extends React.Component {
           </Menu>
         </Sider>
         <Layout className="AppLayoutContent">
-          <Header>系统</Header>
-          <Content style={{ margin: '24px 16px 0' }}>
-            <div style={{ padding: 24, background: '#fff' }}>
-              {children}
-            </div>
-            <Footer>System Design &copy;2017 Created by DiDi on 2017.10</Footer>
+          <Header>后台管理系统</Header>
+          <Content>
+            {children}
           </Content>
+          <Footer>System Design &copy;2017 Created by DiDi on 2017.10</Footer>
         </Layout>
       </Layout>
     );
