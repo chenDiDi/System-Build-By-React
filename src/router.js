@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Switch, Route, routerRedux } from 'dva/router';
+import PropTypes from 'prop-types';
+import { Router, Switch, Route, routerRedux, Redirect } from 'dva/router';
 import dynamic from 'dva/dynamic';
 // import IndexPage from './routes/IndexPage';
 import App from './routes/App';
@@ -7,11 +8,14 @@ import App from './routes/App';
 const { ConnectedRouter } = routerRedux;
 
 function RouterConfig({ history, app }) {
+  const error = dynamic({
+    app,
+    component: () => import('./routes/error'),
+  });
   const IndexPage = dynamic({
     app,
     component: () => import('./routes/IndexPage'),
   });
-
   const LoginPage = dynamic({
     app,
     // models: () => [
@@ -27,16 +31,23 @@ function RouterConfig({ history, app }) {
 
   return (
     <ConnectedRouter history={history}>
-      <switch>
+      <Switch>
         <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/">
-          <App>
+        <App>
+          <Switch>
+            <Route exact path="/" render={() => (<Redirect to="/user" />)} />
             <Route exact path="/user" component={UserPage} />
-          </App>
-        </Route>
-      </switch>
+            <Route exact component={error} />
+          </Switch>
+        </App>
+      </Switch>
     </ConnectedRouter>
   );
 }
+
+RouterConfig.PropTypes = {
+  history: PropTypes.object,
+  app: PropTypes.object,
+};
 
 export default RouterConfig;
