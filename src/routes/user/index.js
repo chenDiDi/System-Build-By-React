@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'dva';
 import { Row, Table, Button } from 'antd';
 import Handle from './Handle';
@@ -16,19 +17,29 @@ const dataSource = [{
   address: '西湖区湖底公园1号',
 }];
 
-const userInfo = () => {
-  const listProps = {
-    dataSource,
-  };
-  return (
-    <div>
-      <Row>
-        <h2 className="pageTitle" style={{ color: '#656565' }}>用户列表</h2>
-        <Handle />
-      </Row>
-      <List {...listProps} />
-    </div>
-  );
+class userInfo extends React.Component {
+  render() {
+    const listProps = {
+      userData: this.props.userData,
+    };
+    return (
+      <div>
+        <Row>
+          <h2 className="pageTitle" style={{ color: '#656565' }}>用户列表</h2>
+          <Handle />
+        </Row>
+        <List {...listProps} />
+      </div>
+    );
+  }
+}
+
+userInfo.propTypes = {
+  userData: PropTypes.object.isRequired,
 };
 
-export default userInfo;
+export default connect((state) => {
+  return {
+    userData: state.user.userData,
+  };
+})(userInfo);

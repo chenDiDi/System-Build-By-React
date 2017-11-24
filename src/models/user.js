@@ -7,9 +7,7 @@ import { UserInfo } from '../services/user';
 export default {
   namespace: 'user',
   state: {
-    list: [],
-    total: 0,
-    page: 1,
+    userData: { list: [] },
   },
   reducers: {
     save(state, { payload }) {
@@ -26,9 +24,9 @@ export default {
     *getUserInfo({ payload }, { call, put }) {
       const { page, page_rows, type, key_word } = payload;
       const { data } = yield call(UserInfo, { page, page_rows, type, key_word });
-      // console.log(data, 'data');
+      console.log(data, 'data');
       if (data.code === 1000) {
-        yield put({ type: 'save', payload: { info: data.info } });
+        yield put({ type: 'save', payload: { userData: data.info } });
       } else {
         message.error(data.message);
       }
@@ -40,7 +38,7 @@ export default {
         if (location.pathname === '/user') {
           dispatch({
             type: 'getUserInfo',
-            payload: { page_rows: 8 },
+            payload: { page_rows: 6 },
           });
         }
       });

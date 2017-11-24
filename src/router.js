@@ -28,7 +28,6 @@ function RouterConfig({ history, app }) {
     models: () => [import('./models/user')],
     component: () => import('./routes/user'),
   });
-
   return (
     <ConnectedRouter history={history}>
       <Switch>

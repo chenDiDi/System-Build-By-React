@@ -1,3 +1,19 @@
-.userInfo {
-
+.ListTable {
+  td.avatar {
+    img {
+      display: block;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background-color: burlywood;
+      border-radius: 50%;
+    }
+  }
+  :global {
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      text-align: center;
+    }
+  }
 }

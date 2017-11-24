@@ -54,7 +54,7 @@ export default {
           if (data.code === 1000) {
             const { uid, authorization, nickname, header_path } = data.info;
             // 登录成功后保存用户的基本信息
-            yield put(routerRedux.push('/'));
+            yield put(routerRedux.push('/user'));
             window.localStorage.setItem(STORAGETOKENKEY, authorization);
             window.localStorage.setItem(NICKNAME, nickname);
             window.localStorage.setItem(UID, uid);
@@ -86,7 +86,7 @@ export default {
       window.localStorage.removeItem(UID);
       window.localStorage.removeItem(STORAGETOKENKEY);
       yield put({ type: 'authFail' });
-      yield put(routerRedux.push('/LoginPage'));
+      yield put(routerRedux.push('/login'));
       // location.reload();
     },
   },
