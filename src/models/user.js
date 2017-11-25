@@ -27,6 +27,9 @@ export default {
       console.log(data, 'data');
       if (data.code === 1000) {
         yield put({ type: 'save', payload: { userData: data.info } });
+      } else if (data.code === 1002) {
+        message.error(data.message);
+        yield put({ type: 'app/logout' });
       } else {
         message.error(data.message);
       }

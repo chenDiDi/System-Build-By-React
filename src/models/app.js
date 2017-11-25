@@ -53,13 +53,13 @@ export default {
         if (data) {
           if (data.code === 1000) {
             const { uid, authorization, nickname, header_path } = data.info;
-            // 登录成功后保存用户的基本信息
-            yield put(routerRedux.push('/user'));
             window.localStorage.setItem(STORAGETOKENKEY, authorization);
             window.localStorage.setItem(NICKNAME, nickname);
             window.localStorage.setItem(UID, uid);
             window.localStorage.setItem(HEADER_PATH, header_path);
             window.localStorage.setItem(TITLE, '平台');
+            // 登录成功后保存用户的基本信息
+            yield put(routerRedux.push('/user'));
             yield put({
               type: 'authSuccess',
             });
@@ -81,13 +81,13 @@ export default {
         yield put({ type: 'logout' });
       }
     },
+    // 退出登录
     *logout({ payload }, { put }) {
       window.localStorage.removeItem(NICKNAME);
       window.localStorage.removeItem(UID);
       window.localStorage.removeItem(STORAGETOKENKEY);
       yield put({ type: 'authFail' });
       yield put(routerRedux.push('/login'));
-      // location.reload();
     },
   },
   subscriptions: {

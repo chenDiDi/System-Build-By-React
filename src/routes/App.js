@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon } from 'antd';
+import { connect } from 'dva';
+import { Layout, Menu, Icon, Dropdown, Avatar } from 'antd';
 import { Link } from 'dva/router';
-import './App.less';
+import styles from './App.less';
 import './Common.less';
+import { NICKNAME, HEADER_PATH } from '../utils/constant';
 
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -33,13 +35,22 @@ class App extends React.Component {
   rootSubmenuKeys = ['sub1', 'sub2', 'sub3'];
   render() {
     const children = this.props.children;
+    const menuUser = (
+      <Menu className="DownMenu">
+        <Menu.Item>
+          <div onClick={() => { this.props.dispatch({ type: 'app/logout', payload: {} }); }}>
+            <Icon type="login" />
+            <span>注销登录</span>
+          </div>
+        </Menu.Item>
+      </Menu>
+    );
     return (
       <Layout className="AppLayout">
         <Sider
           collapsible
           breakpoint="lg"
           onCollapse={this.onCollapse}
-          // collapsedWidth="0"
         >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} openKeys={this.state.openKeys} onOpenChange={this.onOpenChange} collapsed={this.state.collapsed} >
@@ -66,7 +77,18 @@ class App extends React.Component {
           </Menu>
         </Sider>
         <Layout className="AppLayoutContent">
-          <Header>后台管理系统</Header>
+          <Header className={styles.header}>
+            <div />
+            <h3>后台管理系统</h3>
+            <div className={styles.headerRight} id="headerRight">
+              <Dropdown className={styles.DownMenu} overlay={menuUser} getPopupContainer={() => document.getElementById('headerRight')}>
+                <span className={styles.avatarStyle}>
+                  <Avatar size="large" src={`${window.localStorage.getItem(HEADER_PATH)}`} />
+                  <span className={styles.avatarName}>{`${window.localStorage.getItem(NICKNAME)}`}</span>
+                </span>
+              </Dropdown>
+            </div>
+          </Header>
           <Content>
             {children}
           </Content>
@@ -81,4 +103,4 @@ App.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default App;
+export default connect()(App);

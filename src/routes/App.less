@@ -51,3 +51,100 @@
     }
   }
 }
+
+.header {
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  // header右边内容
+  .headerRight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    :global {
+      .ant-dropdown {
+        top: 70px;
+      }
+      .DownMenu {
+        border-radius: 3px;
+
+        .ant-dropdown-menu-item > div {
+          width: 100%;
+        }
+
+        li {
+          text-align: center;
+          border-bottom: 1px solid #eee;
+
+          &:last-child {
+            border-bottom: none;
+          }
+          &:hover {
+            background: #00a0e9 !important;
+
+            > div, span {
+              color: #fff;
+              border-bottom: none;
+            }
+
+            a {
+              color: #fff;
+              border-bottom: none;
+            }
+          }
+
+          a, span {
+            display: inline-block;
+            font-size: 16px;
+            padding: 10px 0;
+            margin: 0 10px;
+            color: #222;
+            cursor: pointer;
+          }
+
+          > div i {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .avatarStyle {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px 0 25px;
+
+      :global {
+        .ant-avatar {
+          vertical-align: middle;
+        }
+      }
+
+      &:hover {
+        background-color: #108ee9;
+
+        .avatarName {
+          color: #fff;
+        }
+      }
+
+      .avatarName {
+        display: inline-block;
+        font-size: 16px;
+        color: #333333;
+        padding: 0 10px;
+        vertical-align: middle;
+
+      }
+    }
+
+    span {
+      cursor: pointer;
+    }
+  }
+}
