@@ -100,7 +100,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
 };
 
 export default connect()(App);

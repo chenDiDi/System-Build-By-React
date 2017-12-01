@@ -23,10 +23,14 @@ function RouterConfig({ history, app }) {
     // ],
     component: () => import('./routes/login'),
   });
-  const UserPage = dynamic({
+  const User = dynamic({
     app,
     models: () => [import('./models/user')],
     component: () => import('./routes/user'),
+  });
+  const UserDetail = dynamic({
+    app,
+    component: () => import('./routes/user/detail'),
   });
   return (
     <ConnectedRouter history={history}>
@@ -35,7 +39,8 @@ function RouterConfig({ history, app }) {
         <App>
           <Switch>
             <Route exact path="/" render={() => (<Redirect to="/user" />)} />
-            <Route exact path="/user" component={UserPage} />
+            <Route exact path="/user" component={User} />
+            <Route exact path="/userDetail" component={UserDetail} />
             <Route exact component={error} />
           </Switch>
         </App>
