@@ -5,7 +5,7 @@
   padding: 0 25px;
 
   .userDetailInfo {
-    margin: 15px 0;
+    margin: 20px 0 30px;
     padding-bottom: 15px;
     border-bottom: 1px solid #e9e9e9;
 
@@ -16,28 +16,44 @@
       vertical-align: -0.3em;
     }
 
-    .InfoContent {
+    .UInfo {
+      position: relative;
       width: 100%;
-      padding: 15px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 15px 0;
       font-size: 16px;
 
-      .InfoContentLeft,
-      .InfoContentRight {
+      .UInfoCont {
+        margin-right: 5%;
+        width: 35%;
         display: flex;
-        width: 60%;
+        justify-content: flex-start;
         margin-bottom: 16px;
 
-        > div {
-          width: 50%;
-          margin-right: 5%;
-
-          .ant-form-item-label label{
-            font-size: 16px;
-          }
+        > span {
+          width: 100px;
         }
+
       }
     }
-
   }
+}
 
+:global {
+  .UAvatar {
+    position: absolute;
+    left: 83%;
+    top: 0;
+
+    > span{
+      width: 100px;
+      height: 120px;
+      background: #ccc;
+    }
+    p {
+      text-align: center;
+      margin-top: 16px;
+    }
+  }
 }
