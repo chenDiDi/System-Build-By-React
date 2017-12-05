@@ -3,18 +3,35 @@
  **/
 import React from 'react';
 import { Icon } from 'antd';
+import FileUpload from './FileUpload';
+import AvatarCropper from './AvatarCropper';
 import styles from './AvatarCropper.less';
 
 class UserHead extends React.Component {
   state = {
     croppedImg: '',
+    img: null,
+    cropperOpen: false,
+  };
+  // 获取暂存区中的图片base64url数据
+  handleFileChange = (dataUrl) => {
+    this.setState({
+      img: dataUrl,
+      cropperOpen: true,
+    });
+  };
+  // 关闭裁剪模态框
+  handleRequestHide= () => {
+    this.setState({
+      cropperOpen: false,
+    });
   };
   render() {
     const { croppedImg } = this.props;
     return (
       <div>
         <div className={styles.AvatarUploader}>
-          <div>
+          <FileUpload handleFileChange={this.handleFileChange}>
             {croppedImg ?
               <img
                 src={croppedImg}
@@ -27,7 +44,14 @@ class UserHead extends React.Component {
                 className={styles.Trigger}
               />
             }
-          </div>
+          </FileUpload>
+          {this.state.cropperOpen &&
+            <AvatarCropper
+              cropperOpen={this.state.cropperOpen}
+              image={this.state.img}
+              onRequestHide={this.handleRequestHide}
+            />
+          }
         </div>
       </div>
     );
