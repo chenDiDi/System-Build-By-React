@@ -42,8 +42,8 @@ class Cropper extends React.Component {
     img.onload = () => {
       const scaledImage = this.fitImageToCanvas(img.width, img.height);
       scaledImage.resource = img;
-      scaledImage.x = 0;
-      scaledImage.y = 0;
+      scaledImage.x = 0;     //  ??
+      scaledImage.y = 0;     //   ??
       this.setState({
         dragging: false,
         image: scaledImage,
@@ -110,6 +110,37 @@ class Cropper extends React.Component {
 
     context.drawImage(image.resource, x, y, image.width * this.props.zoom, image.height * this.props.zoom);
     context.restore();
+  };
+  mouseMoveListener = (e) => {
+    if (!this.state.dragging) return;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    const imageX = this.state.image.x;
+    const imageY = this.state.image.y;
+
+    const newImage = this.state.image;
+
+    if (this.state.mouse.x && this.state.mouse.y) {
+      const dx = this.state.mouse.x - mouseX;
+      const dy = this.state.mouse.y - mouseY;
+
+      const bounded = this.boundedCoords(imageX, imageY, dx, dy);
+    }
+  };
+  boundedCoords = (x, y, dx, dy) => {
+    const newX = x - dx;
+    const newY = y - dy;
+
+    const scaledWidth = this.state.image.width * this.state.zoom;
+    const dw = (scaledWidth - this.state.image.width) / 2;
+    const imageLeftEdge = this.state.image.x - dw;
+    const imageRightEdge = (imageLeftEdge + scaledWidth);
+
+    const rightEdge = this.props.width;    // canvas的左右边缘值
+    const leftEdge = 0;
+
+    if (newX - dw) {}
   };
   render() {
     return (
